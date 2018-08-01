@@ -57,6 +57,7 @@ import android.app.Activity;
 import android.view.Gravity;
 
 
+
 public class MainActivity extends AppCompatActivity
         implements OnItemLongClickListener,
         ConnectionCallbacks, OnConnectionFailedListener, ResultCallback<Status>, ActivityCompat.OnRequestPermissionsResultCallback
@@ -103,7 +104,7 @@ public class MainActivity extends AppCompatActivity
 
         mContext = getApplicationContext();
         mActivity = MainActivity.this;
-        mLinearLayout = (LinearLayout) findViewById(R.id.main) ;
+        mLinearLayout = (LinearLayout) findViewById(R.id.content_main) ;
         mButton = (ImageButton) findViewById(R.id.ib_close);
 
 
@@ -215,7 +216,6 @@ public class MainActivity extends AppCompatActivity
 
     protected void OnDestroy()
     {
-
     }
 
     @Override
@@ -324,7 +324,8 @@ public class MainActivity extends AppCompatActivity
         // The INITIAL_TRIGGER_ENTER flag indicates that geofencing service should trigger a
         // GEOFENCE_TRANSITION_ENTER notification when the geofence is added and if the device
         // is already inside that geofence.
-        builder.setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER);
+        builder.setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER |
+                GeofencingRequest.INITIAL_TRIGGER_EXIT );
 
         // Add the geofences to be monitored by geofencing service.
         builder.addGeofences(mGeofenceList);
@@ -482,8 +483,9 @@ public class MainActivity extends AppCompatActivity
                             entry.getValue().latitude,
                             entry.getValue().longitude,
                             mfRadius
-                    )
 
+                    )
+                 //   .setNotificationResponsiveness(9)
                     // Set the expiration duration of the geofence. This geofence gets automatically
                     // removed after this period of time
                     .setExpirationDuration(Geofence.NEVER_EXPIRE)   //  .setExpirationDuration(Constants.GEOFENCE_EXPIRATION_IN_MILLISECONDS)

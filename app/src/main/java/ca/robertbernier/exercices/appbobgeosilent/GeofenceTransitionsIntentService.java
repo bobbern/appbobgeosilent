@@ -118,9 +118,6 @@ public class GeofenceTransitionsIntentService extends IntentService {
                     Log.e(TAG, "STRAM RING RINEGER MODE VIBE", xException);
                     }
 
-
-
-
             mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,0,0);
             }
 

@@ -36,14 +36,16 @@ public final class Constants {
      */
     public static final HashMap<String, LatLng> SILENTS_AREAS_A_BOB = new HashMap<String, LatLng>();
     static {
+        //  DOMICILE CASGRAIN
+        SILENTS_AREAS_A_BOB.put("HOME", new LatLng(45.531811,-73.608006));
+
         // EVAL
         SILENTS_AREAS_A_BOB.put("EVAL", new LatLng(45.5505188, -73.7436257));
 
         //  GL
         SILENTS_AREAS_A_BOB.put("GL", new LatLng(45.5807945,-73.705501));
 
-        //  DOMICILE CASGRAIN
-        SILENTS_AREAS_A_BOB.put("HOME", new LatLng(45.531811,-73.608006));
+
 
 
     }
