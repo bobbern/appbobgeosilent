@@ -55,13 +55,14 @@ import android.widget.RelativeLayout;
 import android.view.ViewGroup.LayoutParams;
 import android.app.Activity;
 import android.view.Gravity;
-
+import android.media.AudioManager;
 
 
 public class MainActivity extends AppCompatActivity
         implements OnItemLongClickListener,
         ConnectionCallbacks, OnConnectionFailedListener, ResultCallback<Status>, ActivityCompat.OnRequestPermissionsResultCallback
 {
+    public static AudioManager mAudioManager;
     protected static final String TAG = "GEO_SILENT";
     //         * Provides the entry point to Google Play services.
     protected GoogleApiClient mGoogleApiClient;
@@ -76,6 +77,10 @@ public class MainActivity extends AppCompatActivity
     // Buttons for kicking off the process of adding or removing geofences.
     private Button mAddGeofencesButton;
     private Button mRemoveGeofencesButton;
+    // Buttons for brut on or of volume
+    private Button mPopUpVolume;
+    private Button mSilentMode;
+
     private TextView mtxtLatitude;
     private TextView  mtxtLongitude;
     private TextView  mtxtRadius;
@@ -101,12 +106,13 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         mContext = getApplicationContext();
         mActivity = MainActivity.this;
         mLinearLayout = (LinearLayout) findViewById(R.id.content_main) ;
         mButton = (ImageButton) findViewById(R.id.ib_close);
-
+        mPopUpVolume = ( Button) findViewById(R.id.popUpVolume_button);
+        mSilentMode= ( Button) findViewById(R.id.silentMode_button);
 
         // debugging au debut
         //   registerReceiver(br, new IntentFilter("1"));
@@ -350,6 +356,20 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    public void popUpVolume_ButtonHandler(View view) {
+        LogInEvenement(  "popUpVolume_ButtonHandler " );
+        Toast.makeText(this, "popUpVolume_ButtonHandler", Toast.LENGTH_SHORT).show();
+        mAudioManager.setStreamVolume(AudioManager.STREAM_RING, 15, AudioManager.FLAG_ALLOW_RINGER_MODES|AudioManager.FLAG_PLAY_SOUND);
+        mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,15,0);
+    }
+
+    public void silentMode_ButtonHandler(View view) {
+        LogInEvenement(  "silentMode_ButtonHandler " );
+        Toast.makeText(this, "silentMode_ButtonHandler", Toast.LENGTH_SHORT).show();
+        mAudioManager.setStreamVolume(AudioManager.STREAM_RING, 0, AudioManager.RINGER_MODE_VIBRATE );
+        mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,0,0);
+    }
+
     private void addGeofence()
     {
 
@@ -470,12 +490,12 @@ public class MainActivity extends AppCompatActivity
      */
     public void populateGeofenceList() {
         LogInEvenement(  "populateGeofenceList ");
-        for (Map.Entry<String, LatLng> entry : Constants.SILENTS_AREAS_A_BOB.entrySet()) {
+        for (Map.Entry<String[], LatLng> entry : Constants.SILENTS_AREAS_A_BOB.entrySet()) {
 
             mGeofenceList.add(new Geofence.Builder()
                     // Set the request ID of the geofence. This is a string to identify this
                     // geofence.
-                    .setRequestId(entry.getKey())
+                    .setRequestId(entry.getKey()[0])
 
                     // Set the circular region of this geofence.
                     .setCircularRegion(

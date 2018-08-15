@@ -29,21 +29,36 @@
         tools:layout_editor_absoluteY="6dp">
 
         <Button
+            android:id="@+id/silentMode_button"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_weight="1"
+            android:onClick="silentMode_ButtonHandler"
+            android:text="SILENT" />
+
+        <Button
+            android:id="@+id/popUpVolume_button"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_weight="1"
+            android:onClick="popUpVolume_ButtonHandler"
+            android:text="POPUP the VOLUME" />
+
+        <Button
             android:id="@+id/add_geofences_button"
             android:layout_width="200dp"
-            android:layout_height="60dp"
+            android:layout_height="100dp"
             android:layout_weight="1"
             android:onClick="addGeofencesButtonHandler"
-            android:text="@string/add_geofences" />
+            android:text="add_geofences_button" />
 
         <Button
             android:id="@+id/remove_geofences_button"
             android:layout_width="200dp"
-            android:layout_height="60dp"
+            android:layout_height="100dp"
             android:layout_weight="1"
             android:onClick="removeGeofencesButtonHandler"
-            android:text="@string/remove_geofences" />
-
+            android:text="remove_geofences_button" />
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

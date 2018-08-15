@@ -32,18 +32,18 @@ public final class Constants {
     public static final float GEOFENCE_RADIUS_IN_METERS = 50; // 1 mile, 1.6 km
 
     /**
-     * Map for storing information about airports in the San Francisco bay area.
+     * Map for storing information about mes endrois a modifier le son.
      */
-    public static final HashMap<String, LatLng> SILENTS_AREAS_A_BOB = new HashMap<String, LatLng>();
+    public static final HashMap<String[],  LatLng> SILENTS_AREAS_A_BOB = new HashMap<String[], LatLng>();
     static {
         //  DOMICILE CASGRAIN
-        SILENTS_AREAS_A_BOB.put("HOME", new LatLng(45.531811,-73.608006));
+        SILENTS_AREAS_A_BOB.put(new String[]{"HOME", "UP", "UP"}, new LatLng(45.531811,-73.608006));
 
         // EVAL
-        SILENTS_AREAS_A_BOB.put("EVAL", new LatLng(45.5505188, -73.7436257));
+        SILENTS_AREAS_A_BOB.put( new String[]{"EVAL", "DOWN", "UP"}, new LatLng(45.5505188, -73.7436257));
 
         //  GL
-        SILENTS_AREAS_A_BOB.put("GL", new LatLng(45.5807945,-73.705501));
+        SILENTS_AREAS_A_BOB.put(  new String[]{"GL", "DOWN", "UP"}, new LatLng(45.5807945,-73.705501));
 
 
 
